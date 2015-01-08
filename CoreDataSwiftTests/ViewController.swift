@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         var appdel = UIApplication.sharedApplication().delegate as AppDelegate
-        if let cus = appdel.coreDataHelper.createCustomer(){
+        if let cus = appdel.coreDataHelper.createCustomer(1000){
             NSLog("customer cteated")
         }
         else{

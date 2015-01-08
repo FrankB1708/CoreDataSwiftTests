@@ -8,8 +8,10 @@
 
 import UIKit
 import XCTest
+import CoreDataSwiftTests
 
 class CoreDataSwiftTestsTests: XCTestCase {
+    var coreDataHelper = CoreDataHelper()
     
     override func setUp() {
         super.setUp()
@@ -21,9 +23,23 @@ class CoreDataSwiftTestsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testCanCreateCustomer() {
+        var customer = self.coreDataHelper.createCustomer(1000)
+        XCTAssertNotNil(customer, "could not create customer")
+    }
+    
+    func testCanfetchCustomer() {
+        var cust = self.coreDataHelper.createCustomer(1000)
+        cust?.name = "Bill"
+        self.coreDataHelper.saveContext()
+        var customers = self.coreDataHelper.fetchCustomers(1000)
+        XCTAssertNotNil(customers, "could not create customer")
+        XCTAssertNotEqual(customers!.count, 0, "there should be at least one customer")
+        for customer in customers!{
+            var id = customer.customerID
+            var name = customer.name as String
+            NSLog("\(id): \(name)")
+        }
     }
     
     func testPerformanceExample() {

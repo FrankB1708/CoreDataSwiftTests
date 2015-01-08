@@ -60,6 +60,9 @@ public class CoreDataHelper{
         return managedObjectContext
         }()
     
+    public init(){
+        
+    }
     
     public func saveContext () {
         if let moc = self.managedObjectContext {
@@ -73,9 +76,19 @@ public class CoreDataHelper{
         }
     }
     
-    public func createCustomer() -> Customer?{
+    public func createCustomer(customerID:NSNumber!) -> Customer?{
         var customer = NSEntityDescription.insertNewObjectForEntityForName("Customer", inManagedObjectContext: self.managedObjectContext!) as? Customer
+        customer?.customerID = customerID
         return customer
     }
+    
+    public func fetchCustomers(customerID:NSNumber!)->[Customer]?{
+        var request = NSFetchRequest(entityName: "Customer")
+        request.predicate = NSPredicate(format: "customerID = %@", customerID)
+        var error : NSError?
+        // FIXME: implement error handling for the fetch request
+        return self.managedObjectContext?.executeFetchRequest(request, error: &error) as? [Customer]
+    }
+
 
 }
