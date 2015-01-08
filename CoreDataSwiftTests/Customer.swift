@@ -13,7 +13,7 @@ import CoreData
 public class Customer: NSManagedObject {
 
     @NSManaged public var customerID: NSNumber
-    @NSManaged public var name: String
+    @NSManaged public var name: String!
     @NSManaged public var orders: NSSet
 
 }

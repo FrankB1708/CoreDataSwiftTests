@@ -24,29 +24,25 @@ class CoreDataSwiftTestsTests: XCTestCase {
     }
     
     func testCanCreateCustomer() {
-        var customer = self.coreDataHelper.createCustomer(1000)
+        var customer = coreDataHelper.createCustomer(1000)
         XCTAssertNotNil(customer, "could not create customer")
     }
     
     func testCanfetchCustomer() {
-        var cust = self.coreDataHelper.createCustomer(1000)
-        cust?.name = "Bill"
+        var cust = coreDataHelper.createCustomer(1000)
+        //cust?.name = "Bill"
         self.coreDataHelper.saveContext()
-        var customers = self.coreDataHelper.fetchCustomers(1000)
+        var customers = coreDataHelper.fetchCustomers(1000)
         XCTAssertNotNil(customers, "could not create customer")
         XCTAssertNotEqual(customers!.count, 0, "there should be at least one customer")
         for customer in customers!{
             var id = customer.customerID
-            var name = customer.name as String
+            if let name = customer.name as String?{
             NSLog("\(id): \(name)")
+            }else{
+                NSLog("\(id): nil")
+            }
         }
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+
 }

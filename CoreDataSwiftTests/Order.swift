@@ -12,8 +12,8 @@ import CoreData
 @objc(Order)
 public class Order: NSManagedObject {
 
-    @NSManaged public var timeStamp: NSDate
-    @NSManaged public var price: NSDecimalNumber
-    @NSManaged public var customer: Customer
+    @NSManaged public var timeStamp: NSDate?
+    @NSManaged public var price: NSDecimalNumber?
+    @NSManaged public var customer: Customer?
 
 }
